@@ -46,7 +46,9 @@
         color: var(--text-color);
         margin: 0px 10px;
     }
-
+    .right a:first-of-type, a:nth-of-type(2){
+        font-size: 15px;
+    }
     .right a:last-of-type{
         color:var(--background-color);
         background-color: #262626;
@@ -56,6 +58,9 @@
     .right span {
         margin-left: 5px;
     }
+
+        
+   
       
     @media (max-width: 612px) {
     
@@ -67,18 +72,23 @@
             display:none;
         }
         .right a:first-of-type, a:nth-of-type(2) {
-            font-size: 22px;
+            font-size: 26px;
         }
         .right a:last-of-type {
             font-size: 15px;
+            position: relative;
+            top: -4px;
+            
+          
         }
 
 
         .left a {
-            font-size: 20px;   
+            font-size: 20px; 
+              
         }
         nav {
-            ;
+            
         }
 
     }
