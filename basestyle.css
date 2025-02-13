@@ -1,9 +1,12 @@
 :root {
-    --text-color: #262626;
-    --link-color: #334991;
+    --text-color: #000000;
+    --link-color: #3a53a5;
     --background-color: #eeeff1;
 }
-    
+    body {
+        background-color: #bfc0c2;
+        color: #000000;
+    }
 * {
         margin: 0;
         padding: 0;
@@ -13,6 +16,7 @@
 
     html{
         scroll-behavior: smooth;
+        
     }
 
     body {
@@ -39,15 +43,16 @@
     .left a {
         color: var(--text-color);
         font-weight: 600;
-        font-size:22px
+        font-size:28px
     }
 
     .right a {
         color: var(--text-color);
         margin: 0px 10px;
+        font-size: 20px;
     }
     .right a:first-of-type, a:nth-of-type(2){
-        font-size: 15px;
+        
     }
     .right a:last-of-type{
         color:var(--background-color);
@@ -60,13 +65,86 @@
     }
 
         
+   /* Section One */
+
+   .Links a {
+    padding: 5px 15px;
+    margin-top: 10px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    font-size: 20px;
+    border: 2px solid var(--link-color);
+    border-radius: 5px;
+    border-color: #262626;
+    display: inline-flex; 
+    align-items: center; 
+}
+    
+    
+   } 
+
+   .Links {
+    display: flex; 
+    gap: 10px; 
+    padding-top: 5px;
+}
+
+   .Me {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 50px;
+    margin: 50px 0;
+   }
    
+   .Me .text{
+    flex:5;
+    font-size: 26px;
+    padding-right: 30px;
+   }
+
+   
+   
+   .Me h2{
+    font-size: 40px;
+    padding-bottom: 5px;
+   }
+   
+   .Headshot img {
+    max-width: 1000px; 
+    width: 100%; 
+    height: auto; 
+    border-radius: 50px;
+    border-style:solid;
+    border-width: 4px;
+    border-color: black; 
+   
+}
+
+  
+
+    @media (max-width: 1481px) {
+        .Me {
+            flex: 2;
+            display: flex;
+            flex-direction: column-reverse;
+            text-align: center;
+        }
+        
+        .text{
+            padding-top: 20px;
+        }
+        .Headshot {
+            max-width: 800px;
+            
+        }
+
+
       
-    @media (max-width: 612px) {
+    @media (max-width: 718px) {
     
         nav {
-            padding: 0 20px
-        
+            padding: 0 0px
         }
         .right span{
             display:none;
@@ -81,15 +159,36 @@
             
           
         }
-
-
         .left a {
             font-size: 20px; 
-              
+            padding-left: 10px; 
         }
-        nav {
+
+        .Me .text {
+            font-size: 17px;
+        }
+
+        .Me h2 {
+            font-size: 25px;
+        }
+
+        .Links a {
+            padding: 5px 15px;
+            margin-top: 5px;
+            margin-right: 5px;
+            margin-bottom: 5px;
+            font-size:15px;
+            border: 2px solid var(--link-color);
+            border-radius: 5px;
+            border-color: #262626;
+            display: inline-flex; 
+            align-items: center; 
+        }
+        
+        
             
         }
+        
 
     }
 
