@@ -120,7 +120,36 @@
     border-color: black; 
    
 }
+    /*Skills Section*/
+    .skills-section{
+        padding: 0 50px;
+        margin-bottom: 100px;
+    }
 
+    .skills-section h2{
+        text-align: center;
+        font-size: 30px;
+    }
+
+    .skills-section .text{
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    .skillboxes img{
+        width: 50px;
+        height: auto;
+    }
+    .skillboxes .skillcss img{
+        width: 90px;
+        height: auto;
+        
+    }
+    .skills-section .skillboxes{
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
   
 
     @media (max-width: 1481px) {
@@ -185,6 +214,13 @@
             align-items: center; 
         }
         
+        .Me {
+            padding: 0 20px;
+        }
+
+        .Me .text h2 {
+            font-size: 30px;
+        }
         
             
         }
