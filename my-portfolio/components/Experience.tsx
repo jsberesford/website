@@ -7,7 +7,7 @@ const M: any = motion;
 
 export default function Experience() {
   const items = [
-    { role: "Founder", company: "Alphora", period: "2023 - Present" },
+    { role: "Founder", company: "Alphora", period: "Oct 2025 - Present" },
     { role: "Software Engineering Intern", company: "Premium Food Service", period: "Feb 2025 - Present" }
   ];
 
