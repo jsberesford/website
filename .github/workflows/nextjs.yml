@@ -32,7 +32,7 @@ jobs:
           static_site_generator: next
           
       - name: Install dependencies
-        run: cd my-portfolio && npm ci
+        run: cd my-portfolio && npm install
         
       - name: Build with Next.js
         run: cd my-portfolio && npm run build
