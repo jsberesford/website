@@ -77,7 +77,7 @@ export default function Projects() {
                 <div>
                   <h3 className="font-semibold text-lg mb-1">{p.title}</h3>
                   <div className="text-xs text-slate-600 mb-2">{p.tech}</div>
-                  <p className="text-sm text-slate-700">{p.desc}</p>
+                  {/* short description moved into the expandable bullets so it shows as a proper list item */}
                 </div>
                 <div className="flex items-start gap-2">
                   <button
@@ -104,10 +104,12 @@ export default function Projects() {
               >
                 {p.bullets && (
                   <ul className="list-disc pl-4 space-y-2">
-                    {p.bullets.map((b, idx) => (
-                      <li key={idx}>{b}</li>
-                    ))}
-                  </ul>
+                        {/* include the short description as the first bullet */}
+                        {p.desc && <li className="font-medium">{p.desc}</li>}
+                        {p.bullets.map((b, idx) => (
+                          <li key={idx}>{b}</li>
+                        ))}
+                      </ul>
                 )}
                 <div className="mt-4 flex gap-2">
                   <a className="text-xs px-3 py-1 rounded-full bg-amber-50 text-slate-900 hover:bg-amber-100 transition">View</a>
