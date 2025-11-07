@@ -1,5 +1,4 @@
 // app/page.tsx
-import Navbar from "@/components/Navbar";
 import ChatWidget from "@/components/ChatWidget";
 import Projects from "@/components/Projects";
 import Experience from "@/components/Experience";
@@ -9,8 +8,6 @@ import Hero from "@/components/Hero";
 export default function Home() {
   return (
     <div className="min-h-dvh">
-      <Navbar />
-
       <main>
         <div className="site-container">
           <Hero />

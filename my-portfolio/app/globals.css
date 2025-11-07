@@ -71,6 +71,18 @@
   --text-muted: #5b6b70; /* softened body text */
 }
 
+/* Dark theme variables (applied when html[data-theme="dark"]) */
+html[data-theme="dark"] {
+  /* Keep the same warm accent family as light mode for brand cohesion */
+  --bg-1: #07121a; /* very dark navy */
+  --bg-2: #071a20; /* deep slate */
+  --accent: #e36f57; /* warm clay (cohesive with light mode) */
+  --accent-2: #f0b864; /* sunlit amber (lighter companion) */
+  --accent-muted: rgba(227,111,87,0.08); /* subtle warm mute for surfaces */
+  --text-strong: #e6f2ef; /* light text for headings */
+  --text-muted: #9fb0ad; /* muted body text in dark */
+}
+
 html, body, #__next {
   height: 100%;
 }
@@ -84,6 +96,48 @@ body {
   -moz-osx-font-smoothing: grayscale;
   font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
 }
+
+/* Switch color-scheme when dark theme is active (helps form inputs, scrollbars) */
+html[data-theme="dark"] body {
+  color-scheme: dark;
+}
+
+/* Dark-mode component overrides for better contrast and cohesion */
+html[data-theme="dark"] .glass {
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+  color: var(--text-strong);
+  border-radius: 14px;
+  box-shadow: 0 8px 30px rgba(2,6,23,0.48);
+  border: 1px solid rgba(255,255,255,0.04);
+}
+
+html[data-theme="dark"] .btn {
+  box-shadow: 0 10px 24px rgba(227,111,87,0.12);
+}
+html[data-theme="dark"] .btn:hover { box-shadow: 0 16px 32px rgba(227,111,87,0.16); }
+html[data-theme="dark"] .btn--ghost { color: var(--text-strong); border: 1px solid rgba(255,255,255,0.06); }
+
+/* Cards & outlines */
+html[data-theme="dark"] .card-outline__stroke { stroke: rgba(255,255,255,0.06); filter: drop-shadow(0 2px 8px rgba(0,0,0,0.6)); }
+html[data-theme="dark"] .card-shadow { background: rgba(0,0,0,0.36); transform: translate(10px, 18px); box-shadow: 0 18px 32px rgba(0,0,0,0.6); }
+html[data-theme="dark"] .exp-card {
+  background: linear-gradient(180deg, rgba(12,20,26,0.56), rgba(8,14,18,0.6));
+  border: 1px solid rgba(255,255,255,0.03);
+  box-shadow: 0 10px 18px rgba(2,6,12,0.6);
+}
+
+/* Section dividers softer in dark */
+html[data-theme="dark"] .section + .section { border-top: 1px solid rgba(255,255,255,0.03); }
+
+/* Hero blobs: tone down and warm the glows in dark mode */
+html[data-theme="dark"] .hero-blobs .blob.one { background: radial-gradient(circle at 30% 30%, rgba(227,111,87,0.12), rgba(227,111,87,0.03) 42%, transparent 68%); }
+html[data-theme="dark"] .hero-blobs .blob.two { background: radial-gradient(circle at 70% 70%, rgba(240,184,100,0.10), rgba(240,184,100,0.02) 46%, transparent 68%); }
+
+/* Theme toggle: ensure knob stands out on dark backgrounds */
+html[data-theme="dark"] .theme-toggle__knob { background: var(--text-strong); box-shadow: 0 6px 18px rgba(0,0,0,0.6); }
+
+/* Button contact variant: darker shadow on dark */
+html[data-theme="dark"] .btn--contact { box-shadow: 0 16px 34px rgba(227,99,85,0.12); }
 
 .site-container { max-width: 1080px; margin-left: auto; margin-right: auto; padding-left: 1.25rem; padding-right: 1.25rem; }
 .section { padding-top: 6rem; padding-bottom: 6rem; }
@@ -201,3 +255,34 @@ body {
 
 /* subtle divider between sections */
 .section + .section { border-top: 1px solid rgba(15,23,42,0.04); }
+
+/* Theme toggle small helpers */
+.theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+.theme-toggle__button {
+  width: 44px;
+  height: 28px;
+  border-radius: 9999px;
+  padding: 3px;
+  display: inline-flex;
+  align-items: center;
+  background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02));
+  border: 1px solid rgba(15,23,42,0.06);
+  transition: background 220ms ease, transform 160ms ease;
+}
+.theme-toggle__knob {
+  width: 20px;
+  height: 20px;
+  border-radius: 9999px;
+  background: var(--bg-1);
+  box-shadow: 0 4px 10px rgba(2,6,23,0.18);
+  transition: transform 220ms cubic-bezier(.2,.9,.3,1), background 200ms ease;
+}
+html[data-theme="dark"] .theme-toggle__button { background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)); border: 1px solid rgba(255,255,255,0.06); }
+html[data-theme="dark"] .theme-toggle__knob { background: var(--text-strong); box-shadow: 0 6px 18px rgba(2,6,23,0.48); }
+
+/* small utility to fade color references when theme switches */
+.fade-color-transition { transition: color 220ms ease, background 220ms ease, border-color 220ms ease; }
