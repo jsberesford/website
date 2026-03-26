@@ -385,9 +385,9 @@ function DesktopOS({ visible, time, date }: { visible: boolean; time: string; da
     focus(id);
   };
 
-  // Auto-open terminal once desktop appears
+  // Auto-open terminal once desktop appears (desktop only)
   useEffect(() => {
-    if (!visible) return;
+    if (!visible || isMobile) return;
     const t = setTimeout(() => open("terminal"), 280);
     return () => clearTimeout(t);
   // eslint-disable-next-line react-hooks/exhaustive-deps
