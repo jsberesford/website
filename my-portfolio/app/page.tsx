@@ -227,7 +227,7 @@ function runCmd(raw: string): Line[] | "CLEAR" {
       ln("out","  B.S. Computer Science, GPA 3.82"),
       ln("sys","  Expected May 2028"), ln("blank",""),
       ln("out","  Coursework: CS Principles II, Calculus II, Discrete Math"),
-      ln("out","  Involvement: Startup Executive of PROGSU"),
+      ln("out","  Involvement: Vice President of PROGSU"),
     ];
     case "contact": return [
       ln("accent","contact.txt"), ln("blank",""),
@@ -659,7 +659,8 @@ function AboutContent() {
 
       <div className="about-section-title">Involvement</div>
       <p style={{ fontSize: 13, color: "rgba(226,226,240,0.75)", lineHeight: 1.7 }}>
-        Startup Executive at <span style={{ color: "var(--accent)" }}>PROGSU</span>, Georgia State's premier entrepreneurship and programming student org.
+        Vice President of <span style={{ color: "var(--accent)" }}>PROGSU</span>, Georgia State's premier entrepreneurship and programming student org.
+        Planned all operations and finance for a 500-person hackathon, coordinating logistics, budgeting, and vendor relationships end-to-end.
       </p>
     </div>
   );
@@ -744,7 +745,8 @@ const EDU = [
     color: "#7caae8",
     bullets: [
       "Coursework: CS Principles II, Calculus II, Discrete Mathematics",
-      "Startup Executive of PROGSU",
+      "Vice President of PROGSU",
+      "Planned all operations and finance for a 500-person hackathon, coordinating logistics, budgeting, and vendor relationships",
     ],
   },
 ];
