@@ -1,0 +1,46 @@
+// Footer: a quiet sign-off using literal `{token}` syntax that hints at template
+// placeholders, reinforcing the engineer-zine vibe of the rest of the site. A
+// dotted divider above and a handwritten thank-you below soften the closing
+// without competing with the page's content.
+
+const socials = [
+  { label: '{github}', href: 'https://github.com/[YOUR_GITHUB]' },
+  { label: '{linkedin}', href: 'https://linkedin.com/in/[YOUR_LINKEDIN]' },
+  { label: '{twitter}', href: 'https://twitter.com/[YOUR_TWITTER]' },
+  { label: '{email}', href: 'mailto:[YOUR_EMAIL]' },
+  { label: '{readcv}', href: 'https://read.cv/[YOUR_READCV]' },
+];
+
+export default function Footer() {
+  return (
+    <footer className="py-16 text-center">
+      <div
+        aria-hidden="true"
+        className="mx-auto mb-12 h-px max-w-3xl border-t border-dotted border-ink-900/20"
+      />
+
+      <ul className="flex flex-wrap items-center justify-center gap-x-6 gap-y-3">
+        {socials.map((s) => (
+          <li key={s.label}>
+            <a
+              href={s.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-mono text-sm text-ink-900 hover:text-accent-coral transition-colors"
+            >
+              {s.label}
+            </a>
+          </li>
+        ))}
+      </ul>
+
+      <p className="mt-10 font-script text-2xl text-ink-900">
+        thanks for scrolling
+      </p>
+
+      <p className="mt-10 font-mono text-xs text-ink-900/40">
+        Built with Claude Code · Shipped on Vercel
+      </p>
+    </footer>
+  );
+}
