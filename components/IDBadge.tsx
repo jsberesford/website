@@ -23,11 +23,15 @@
 // │  • Scroll   : window scroll → adds vertical impulse to rope points       │
 // │                                                                          │
 // │ 3D treatment                                                             │
-// │  • `perspective: 1400px` on the wrapper                                  │
-// │  • Badge has `transform-style: preserve-3d`; layers sit at different     │
-// │    translateZ (cord clip 1px, body 6px, avatar 4px, vinyl card 8px) so   │
-// │    when the badge yaws you get real parallax between layers.             │
-// │  • Yaw rotation is driven by horizontal tail velocity (weight twisting). │
+// │  • `perspective: 1000px` on the wrapper (origin biased toward the top).  │
+// │  • Both the badge AND its body carry `transform-style: preserve-3d`, so  │
+// │    the inner layers stack in real depth: edge slab -10, body 12, barcode │
+// │    +10, name +20, avatar +30, sheen +34. Turning the card parallaxes     │
+// │    them against each other.                                              │
+// │  • A darker "edge" slab sits behind the face to sell card thickness when │
+// │    it tilts; a specular sheen band sweeps across as yaw changes.         │
+// │  • Yaw = physics twist (horizontal tail velocity) + a cursor look-around │
+// │    lean, so the card leans toward the pointer. Pitch (rotateX) likewise. │
 // │  • The cord renders as two SVG strokes — a dark base + a thin highlight  │
 // │    — giving a cylindrical look.                                          │
 // └──────────────────────────────────────────────────────────────────────────┘
@@ -48,12 +52,21 @@ const MAX_VEL = 10;          // hard cap per axis — prevents whip-crack frames
 const TAIL_FOLLOW = 0.55;
 const ANGLE_LERP = 0.22;
 
+// Cursor look-around tilt (deg). Gentle + heavily lerped so it reads as the
+// card calmly leaning toward the pointer rather than tracking it twitchily.
+const TILT_MAX = 14;
+const TILT_GAIN = 0.06;
+const TILT_LERP = 0.08;
+
 const WRAPPER_W = 360;
 const WRAPPER_H = 400;
 const ANCHOR_X = WRAPPER_W / 2;
 const ANCHOR_Y = 10;
 
 const BADGE_W = 280;
+// Rough vertical offset from the badge's top (where it pins to the cord) to
+// its visual centre — used to decide which way the cursor lean tips the card.
+const BADGE_CENTER_Y = 170;
 
 const BARCODE_WIDTHS = [2, 1, 3, 1, 2, 1, 3, 2, 1, 2, 3, 1, 1, 2, 3, 2, 1, 3, 1, 2, 2, 1];
 
@@ -74,6 +87,7 @@ export default function IDBadge() {
   const pathBaseRef = useRef<SVGPathElement>(null);
   const pathHighlightRef = useRef<SVGPathElement>(null);
   const brandRef = useRef<SVGGElement>(null);
+  const glareRef = useRef<HTMLDivElement>(null);
 
   // Mutable refs — these change every frame but never trigger re-renders.
   const pointsRef = useRef<Point[]>([]);
@@ -81,6 +95,9 @@ export default function IDBadge() {
   const cursorRef = useRef({ x: ANCHOR_X, y: ANCHOR_Y + NUM_SEGMENTS * SEGMENT_LEN });
   const yawRef = useRef({ value: 0, velocity: 0 });
   const angleRef = useRef(0); // smoothed badge heading, EMA across frames
+  // Cursor-driven look-around tilt, smoothed across frames. The card leans
+  // toward the pointer so it reads as a solid object you can peer around.
+  const tiltRef = useRef({ x: 0, y: 0 });
 
   // Initialise the rope once.
   if (pointsRef.current.length === 0) {
@@ -309,11 +326,39 @@ export default function IDBadge() {
         // EMA smoothing so high-frequency jitter doesn't reach the badge.
         angleRef.current += (rawAngle - angleRef.current) * ANGLE_LERP;
 
+        // Look-around tilt: lean the card toward the cursor. Measured from the
+        // badge's approximate centre (tail point + half the body height) so the
+        // pointer "pushes" whichever edge it's nearest. Disabled while dragging
+        // — there the cursor *is* the badge, so a tilt would just be noise.
+        let tgtX = 0;
+        let tgtY = 0;
+        if (!draggingRef.current) {
+          const dcx = cursorRef.current.x - last.x;
+          const dcy = cursorRef.current.y - (last.y + BADGE_CENTER_Y);
+          tgtY = Math.max(-TILT_MAX, Math.min(TILT_MAX, dcx * TILT_GAIN));
+          tgtX = Math.max(-TILT_MAX, Math.min(TILT_MAX, -dcy * TILT_GAIN));
+        }
+        tiltRef.current.x += (tgtX - tiltRef.current.x) * TILT_LERP;
+        tiltRef.current.y += (tgtY - tiltRef.current.y) * TILT_LERP;
+
+        // Total yaw = physics twist + cursor lean. Drive the sheen from it so
+        // the specular band sweeps across the card face as it turns.
+        const yaw = yawRef.current.value + tiltRef.current.y;
+        if (glareRef.current) {
+          const sweep = 50 - yaw * 2.2; // band centre, % across the card
+          glareRef.current.style.background =
+            `linear-gradient(105deg,` +
+            ` rgba(255,255,255,0) ${(sweep - 38).toFixed(1)}%,` +
+            ` rgba(255,255,255,0.14) ${sweep.toFixed(1)}%,` +
+            ` rgba(255,255,255,0) ${(sweep + 38).toFixed(1)}%)`;
+        }
+
         badgeRef.current.style.transform =
           `translate3d(${last.x.toFixed(2)}px, ${last.y.toFixed(2)}px, 0)` +
           ` translate(-50%, 0)` +
           ` rotate(${angleRef.current.toFixed(2)}deg)` +
-          ` rotateY(${yawRef.current.value.toFixed(2)}deg)`;
+          ` rotateY(${yaw.toFixed(2)}deg)` +
+          ` rotateX(${tiltRef.current.x.toFixed(2)}deg)`;
       }
 
       rafId = requestAnimationFrame(tick);
@@ -330,7 +375,8 @@ export default function IDBadge() {
       style={{
         width: WRAPPER_W,
         height: WRAPPER_H,
-        perspective: '1400px',
+        perspective: '1000px',
+        perspectiveOrigin: '50% 35%',
       }}
     >
       {/* Anchor pin — fixed at the top of the wrapper */}
@@ -413,7 +459,7 @@ export default function IDBadge() {
       >
         {/* Cord clip — beveled metal hardware where the strap meets the badge.
             Wider than the ribbon so it visually "grips" the lanyard. */}
-        <div className="flex justify-center" style={{ transform: 'translateZ(1px)' }}>
+        <div className="flex justify-center" style={{ transform: 'translateZ(4px)' }}>
           <div
             aria-hidden
             className="w-14 h-3.5 rounded-sm"
@@ -425,31 +471,59 @@ export default function IDBadge() {
           />
         </div>
 
-        {/* Badge body — stacked shadows simulate card thickness */}
+        {/* Badge body — stacked shadows + a real edge layer simulate card
+            thickness; preserve-3d lets the inner layers (barcode, avatar, name)
+            sit at their own depths so they parallax as the card turns. */}
         <div
           className="bg-ink-900 text-cream-100 rounded-2xl pt-5 pb-9 px-5 w-[280px] relative -mt-0.5"
           style={{
-            transform: 'translateZ(8px)',
+            transform: 'translateZ(12px)',
+            transformStyle: 'preserve-3d',
             boxShadow:
-              'inset 0 1px 0 rgba(255,255,255,0.08),' +
+              'inset 0 1px 0 rgba(255,255,255,0.10),' +
               ' inset 0 -1px 0 rgba(0,0,0,0.6),' +
+              ' inset 1px 0 0 rgba(255,255,255,0.04),' +
+              ' inset -1px 0 0 rgba(0,0,0,0.5),' +
               ' 0 2px 0 rgba(0,0,0,0.55),' +
-              ' 0 5px 0 #050505,' +
-              ' 0 14px 30px -4px rgba(0,0,0,0.45)',
+              ' 0 6px 0 #070707,' +
+              ' 0 10px 0 #050505,' +
+              ' 0 22px 40px -6px rgba(0,0,0,0.55)',
           }}
         >
+          {/* Card edge — a darker slab a few px behind the face. When the card
+              yaws/tilts you see this rim, selling real thickness. */}
+          <div
+            aria-hidden
+            className="absolute -inset-px rounded-2xl pointer-events-none"
+            style={{
+              transform: 'translateZ(-10px)',
+              background: 'linear-gradient(to bottom, #161412 0%, #060606 100%)',
+              boxShadow: '0 0 0 1px rgba(0,0,0,0.8)',
+            }}
+          />
+
           {/* Gloss highlight at the top */}
           <div
             aria-hidden
             className="absolute inset-x-0 top-0 h-16 rounded-t-2xl pointer-events-none"
             style={{
+              transform: 'translateZ(2px)',
               background:
-                'linear-gradient(to bottom, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0) 100%)',
+                'linear-gradient(to bottom, rgba(255,255,255,0.10) 0%, rgba(255,255,255,0) 100%)',
             }}
           />
 
+          {/* Moving specular sheen — its band position is driven by the card's
+              yaw in the rAF loop, so light sweeps across the face as it turns. */}
+          <div
+            ref={glareRef}
+            aria-hidden
+            className="absolute inset-0 rounded-2xl pointer-events-none"
+            style={{ transform: 'translateZ(34px)', mixBlendMode: 'screen' }}
+          />
+
           {/* Barcode */}
-          <div className="flex items-end gap-[2px] h-7 mb-4">
+          <div className="flex items-end gap-[2px] h-7 mb-4" style={{ transform: 'translateZ(10px)' }}>
             {BARCODE_WIDTHS.map((w, i) => (
               <div
                 key={i}
@@ -465,7 +539,10 @@ export default function IDBadge() {
               photo getting fit-to-frame. */}
           <div
             className="w-20 h-20 rounded-full ring-4 ring-cream-100/20 mx-auto overflow-hidden bg-cream-200"
-            style={{ transform: 'translateZ(6px)' }}
+            style={{
+              transform: 'translateZ(30px)',
+              boxShadow: '0 10px 18px -6px rgba(0,0,0,0.6)',
+            }}
           >
             <img
               src="/images/avatar.png"
@@ -476,7 +553,7 @@ export default function IDBadge() {
             />
           </div>
 
-          <div className="mt-4 mb-2 text-center" style={{ transform: 'translateZ(4px)' }}>
+          <div className="mt-4 mb-2 text-center" style={{ transform: 'translateZ(20px)' }}>
             <div className="text-3xl font-bold leading-tight">Jared</div>
             <div className="font-mono text-sm text-cream-100/70 mt-1">Jared Beresford</div>
           </div>

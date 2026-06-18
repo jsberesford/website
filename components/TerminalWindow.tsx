@@ -11,7 +11,7 @@ type Line = { prompt?: string; text?: string; delay: number };
 
 const lines: Line[] = [
   { prompt: '~ $ whoami', delay: 0 },
-  { text: 'Software Engineer with 2+ years experience', delay: 800 },
+  { text: 'Product Manager with 2+ years experience', delay: 800 },
   { prompt: '~ $ ls interests/', delay: 1600 },
   { text: 'cars/  investing/  gaming/', delay: 2400 },
 ];

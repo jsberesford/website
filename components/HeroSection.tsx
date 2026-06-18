@@ -17,7 +17,6 @@ import PolaroidCollage from './PolaroidCollage';
 import TicketCard from './TicketCard';
 import ArchedFrame from './ArchedFrame';
 import PixelDisplay from './PixelDisplay';
-import TornCollage from './TornCollage';
 
 export default function HeroSection() {
   return (
@@ -49,7 +48,6 @@ export default function HeroSection() {
         <TerminalWindow />
         <PolaroidCollage />
         <TicketCard />
-        <TornCollage />
         <ArchedFrame />
         <PixelDisplay />
       </div>
@@ -91,9 +89,9 @@ export default function HeroSection() {
           <TerminalWindow />
         </div>
 
-        {/* Polaroid collage — lower-right, mild tilt */}
+        {/* Polaroid collage — bottom-right corner, mild tilt */}
         <div
-          className="absolute right-[3%] bottom-[12%] z-10"
+          className="absolute right-[2%] bottom-[4%] z-10"
           style={{ transform: 'rotate(-5deg)' }}
         >
           <PolaroidCollage />
@@ -121,14 +119,6 @@ export default function HeroSection() {
           style={{ transform: 'rotate(-3deg)' }}
         >
           <PixelDisplay />
-        </div>
-
-        {/* Torn collage — bottom-center-right */}
-        <div
-          className="absolute right-[23%] bottom-[6%] z-10"
-          style={{ transform: 'rotate(2deg)' }}
-        >
-          <TornCollage />
         </div>
       </div>
     </motion.section>
