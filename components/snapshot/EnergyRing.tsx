@@ -7,9 +7,15 @@ import React from 'react';
 
 type EnergyRingProps = {
   value: number;
+  label?: string;
+  caption?: string;
 };
 
-function EnergyRing({ value }: EnergyRingProps) {
+function EnergyRing({
+  value,
+  label = 'Energy level',
+  caption = "Today's charge",
+}: EnergyRingProps) {
   const clamped = Math.max(0, Math.min(100, value));
   const size = 120;
   const stroke = 12;
@@ -22,7 +28,7 @@ function EnergyRing({ value }: EnergyRingProps) {
   return (
     <div className="bg-cream-50 border border-ink-900/10 rounded-lg p-4 flex flex-col items-center">
       <div className="font-mono text-xs uppercase tracking-wider text-ink-900/60 mb-3 self-start">
-        Energy level
+        {label}
       </div>
       <div className="relative" style={{ width: size, height: size }}>
         <svg width={size} height={size} viewBox={`0 0 ${size} ${size}`}>
@@ -52,7 +58,7 @@ function EnergyRing({ value }: EnergyRingProps) {
         </div>
       </div>
       <div className="font-mono text-[10px] text-ink-900/50 uppercase mt-3">
-        Today&apos;s charge
+        {caption}
       </div>
     </div>
   );
