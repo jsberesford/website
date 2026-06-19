@@ -1,7 +1,8 @@
 import NavBar from '@/components/NavBar';
 import HeroSection from '@/components/HeroSection';
-import AboutSection from '@/components/AboutSection';
 import SnapshotSection from '@/components/SnapshotSection';
+import WorkSection from '@/components/WorkSection';
+import ExperienceSection from '@/components/ExperienceSection';
 import PlaygroundSection from '@/components/PlaygroundSection';
 import Footer from '@/components/Footer';
 
@@ -15,8 +16,9 @@ export default function Page() {
     <main className="relative">
       <NavBar />
       <HeroSection />
-      <AboutSection />
       <SnapshotSection />
+      <WorkSection />
+      <ExperienceSection />
       <PlaygroundSection />
       <Footer />
     </main>
