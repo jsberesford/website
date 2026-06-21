@@ -41,92 +41,88 @@ const ACCENT_DOT: Record<AccentKey, string> = {
 
 const caseFiles: CaseFile[] = [
   {
-    name: 'Cadence',
-    tag: 'Founder',
+    name: 'Shelfboss',
+    tag: 'Full-stack',
     accent: 'coral',
-    role: 'Founder & Product',
-    timeframe: '2023 — Present',
+    role: 'Solo — design & build',
+    timeframe: '2026',
     featured: true,
     problem:
-      'Students juggle classes, clubs, and shifts across five apps that never talk to each other — so plans quietly fall through the cracks. I set out to make one place that turns a messy week into a plan you actually follow.',
+      'Small food operations run inventory and orders on spreadsheets that fall apart under concurrent edits. Shelfboss is a full-stack system that replaces them.',
     approach: [
-      'Cut the v1 scope to a single loop — import your calendar, get one ranked to-do list — and shipped it in 6 weeks.',
-      'Ran weekly interviews with 20 students; killed the social feed when nobody used it twice.',
-      'Prioritized by a simple reach × confidence rubric so the roadmap survived contact with real feedback.',
+      'Architected it on Next.js 14 (App Router) with TypeScript, server components, and route handlers, backed by PostgreSQL via Prisma on a normalized relational schema.',
+      'Used Prisma transactional writes for stock mutations to prevent race conditions on concurrent inventory adjustments and keep order and stock tables consistent.',
+      'Set up CI/CD and production on Vercel — environment-scoped secrets, edge-cached assets, and serverless API routes.',
     ],
     outcome: [
-      '600+ sign-ups in the first semester, fully organic on campus.',
-      '40% week-4 retention — roughly 2× the productivity-app benchmark.',
-      'Pitched to and accepted into [accelerator/competition].',
+      'Consistent order/stock state under concurrent adjustments — no race conditions.',
+      'Resolved an App Router deploy failure by migrating off a static-only host.',
     ],
-    stack: ['Figma', 'Notion', 'SQL', 'Mixpanel', 'Next.js'],
-    links: [
-      { label: 'Live', href: '#' },
-      { label: 'Deck', href: '#' },
-    ],
-  },
-  {
-    name: 'Northwind Labs',
-    tag: 'Product Intern',
-    accent: 'sky',
-    role: 'Product Management Intern',
-    timeframe: 'Summer 2024',
-    problem:
-      'Onboarding drop-off was the team’s top complaint, but nobody could say where it happened. My job was to find the leak and ship a fix that moved the number.',
-    approach: [
-      'Built the first funnel dashboard the team had — instrumented 6 steps that were previously dark.',
-      'Found a permissions screen where 30% of users bounced; wrote the PRD to defer it.',
-      'Partnered with one designer + two engineers to ship behind a flag and A/B test it.',
-    ],
-    outcome: [
-      'Activation up 18% in the test cohort; shipped to 100%.',
-      'Funnel dashboard adopted as the team’s weekly review artifact.',
-    ],
-    stack: ['Amplitude', 'SQL', 'Figma', 'Linear'],
-    links: [{ label: 'Case study', href: '#' }],
-  },
-  {
-    name: 'Volt Mobility',
-    tag: 'PM Intern',
-    accent: 'mint',
-    role: 'Associate PM Intern',
-    timeframe: 'Summer 2023',
-    problem:
-      'Support was drowning in the same three rider questions. Leadership wanted to know whether self-serve help was worth building before committing a team to it.',
-    approach: [
-      'Tagged 500 tickets to size the opportunity — 62% were three repeatable issues.',
-      'Prototyped an in-app help flow in Figma and tested it with 12 riders.',
-      'Wrote the one-pager that scoped a 2-sprint MVP and got it greenlit.',
-    ],
-    outcome: [
-      'Projected ~25% ticket deflection; MVP handed off to a full-time PM.',
-      'Recommendation adopted into the next quarter’s roadmap.',
-    ],
-    stack: ['Figma', 'Looker', 'Zendesk', 'Notion'],
-    links: [{ label: 'One-pager', href: '#' }],
-  },
-  {
-    name: 'Campus Market',
-    tag: 'Side Project',
-    accent: 'lilac',
-    role: 'Solo — design & build',
-    timeframe: '2024',
-    problem:
-      'Buying and selling secondhand on campus lived in chaotic group chats. I wanted to see if a lightweight, school-only marketplace could be cleaner than the status quo.',
-    approach: [
-      'Scoped to one campus and one category (furniture) to validate before expanding.',
-      'Designed and built it solo, end to end, in two weekends.',
-      'Seeded listings myself to get past the cold-start problem.',
-    ],
-    outcome: [
-      '120 listings and ~30 completed trades in the first month.',
-      'Validated demand; documented what I’d change before scaling.',
-    ],
-    stack: ['Next.js', 'Supabase', 'Figma', 'Vercel'],
+    stack: ['Next.js 14', 'TypeScript', 'Prisma', 'PostgreSQL', 'Vercel'],
     links: [
       { label: 'Live', href: '#' },
       { label: 'GitHub', href: '#' },
     ],
+  },
+  {
+    name: 'Flowdate',
+    tag: 'Side Project',
+    accent: 'sky',
+    role: 'Solo — design & build',
+    timeframe: 'Aug — Dec 2025',
+    problem:
+      'Turning “lunch with Sam next Tuesday at 1” into a real calendar event still means manual entry. Flowdate lets natural language do it.',
+    approach: [
+      'Architected an NL pipeline that parses time, date, duration, and location from free text into validated JSON.',
+      'Returned structured fallback options when the input is ambiguous instead of failing.',
+      'Integrated with calendar APIs to create events automatically.',
+    ],
+    outcome: [
+      'Sub-300ms average parse latency.',
+      'Saves ~5 hrs/quarter across a dozen weekly events.',
+    ],
+    stack: ['TypeScript', 'FastAPI', 'Python', 'Calendar APIs'],
+    links: [{ label: 'Website', href: '#' }],
+  },
+  {
+    name: 'Progsu Operations System',
+    tag: 'Ops Project',
+    accent: 'mint',
+    role: 'Club VP project',
+    timeframe: 'Jan 2026 — Present',
+    problem:
+      'A 300-person, 12-hour hackathon has dozens of moving parts and no clear owners — a recipe for day-of failures. I built the system that runs it.',
+    approach: [
+      'Designed a structured run-of-show and task-delegation framework.',
+      'Created ownership matrices so every responsibility had a named owner.',
+      'Wrote risk-mitigation plans for room access, A/V, food timing, and workshop transitions.',
+    ],
+    outcome: [
+      'Cut execution errors and responsibility gaps ~20%.',
+      'Prevented day-of bottlenecks across the full 12-hour event.',
+    ],
+    stack: ['Notion', 'Excel', 'Google Workspace'],
+    links: [{ label: 'Website', href: '#' }],
+  },
+  {
+    name: 'Hacklanta',
+    tag: 'Hackathon',
+    accent: 'lilac',
+    role: 'VP, Operations · Progsu',
+    timeframe: 'Jan 2026 — Present',
+    problem:
+      'Progsu set out to run its hackathon — 300+ attendees, a full day of programming — with no operational playbook to lean on.',
+    approach: [
+      'Coordinated 30 volunteers across 6 minigames and workshops.',
+      'Managed a $7,500 budget across a 12-hour run of show.',
+      'Owned logistics, vendor coordination, and day-of execution end to end.',
+    ],
+    outcome: [
+      '300+ attendees over a 12-hour event.',
+      'Delivered on a $7,500 budget with 30 volunteers.',
+    ],
+    stack: ['Notion', 'Google Workspace', 'Trello'],
+    links: [{ label: 'Website', href: '#' }],
   },
 ];
 
