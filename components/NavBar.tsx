@@ -45,7 +45,7 @@ export default function NavBar() {
         <a
           href="#"
           className="font-script text-2xl text-ink-900 leading-none"
-          aria-label="Jared Beresford — home"
+          aria-label="Jared Beresford home"
         >
           Jared Beresford
         </a>

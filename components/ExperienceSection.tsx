@@ -28,7 +28,7 @@ const stints: Stint[] = [
   {
     org: 'Premium Food Service',
     role: 'Software Engineering Intern',
-    dates: 'Feb 2025 — Present',
+    dates: 'Feb 2025 - Present',
     location: 'Snellville, GA',
     category: 'Internship',
     impact:
@@ -39,22 +39,22 @@ const stints: Stint[] = [
   {
     org: 'Progsu',
     role: 'Vice President',
-    dates: 'Sept 2025 — Present',
+    dates: 'Sept 2025 - Present',
     location: 'Georgia State · Atlanta',
     category: 'Leadership',
     impact:
-      'Lead operations for 500+ members — fiscal decisions, vendor negotiation, and large-scale events (hackathons, workshops, speaker panels).',
+      'Lead operations for 500+ members: fiscal decisions, vendor negotiation, and large-scale events (hackathons, workshops, speaker panels).',
     serial: '№ 0042',
     rotate: 0.9,
   },
   {
     org: 'Gwinnett County Sheriff’s Office',
     role: 'Frontend Engineering Intern',
-    dates: 'Mar 2024 — Dec 2024',
+    dates: 'Mar 2024 - Dec 2024',
     location: 'Lawrenceville, GA',
     category: 'Internship',
     impact:
-      'Optimized gogcso.com for 700+ staff — +22% session time, −18% bounce — and shipped a campaign that lifted engagement 30% and followers 40%.',
+      'Optimized gogcso.com for 700+ staff (+22% session time, −18% bounce) and shipped a campaign that lifted engagement 30% and followers 40%.',
     serial: '№ 0024',
     rotate: -0.8,
   },

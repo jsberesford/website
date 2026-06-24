@@ -44,7 +44,7 @@ const caseFiles: CaseFile[] = [
     name: 'Shelfboss',
     tag: 'Full-stack',
     accent: 'coral',
-    role: 'Solo — design & build',
+    role: 'Solo, design & build',
     timeframe: '2026',
     featured: true,
     problem:
@@ -52,10 +52,10 @@ const caseFiles: CaseFile[] = [
     approach: [
       'Architected it on Next.js 14 (App Router) with TypeScript, server components, and route handlers, backed by PostgreSQL via Prisma on a normalized relational schema.',
       'Used Prisma transactional writes for stock mutations to prevent race conditions on concurrent inventory adjustments and keep order and stock tables consistent.',
-      'Set up CI/CD and production on Vercel — environment-scoped secrets, edge-cached assets, and serverless API routes.',
+      'Set up CI/CD and production on Vercel: environment-scoped secrets, edge-cached assets, and serverless API routes.',
     ],
     outcome: [
-      'Consistent order/stock state under concurrent adjustments — no race conditions.',
+      'Consistent order/stock state under concurrent adjustments, no race conditions.',
       'Resolved an App Router deploy failure by migrating off a static-only host.',
     ],
     stack: ['Next.js 14', 'TypeScript', 'Prisma', 'PostgreSQL', 'Vercel'],
@@ -68,8 +68,8 @@ const caseFiles: CaseFile[] = [
     name: 'Flowdate',
     tag: 'Side Project',
     accent: 'sky',
-    role: 'Solo — design & build',
-    timeframe: 'Aug — Dec 2025',
+    role: 'Solo, design & build',
+    timeframe: 'Aug - Dec 2025',
     problem:
       'Turning “lunch with Sam next Tuesday at 1” into a real calendar event still means manual entry. Flowdate lets natural language do it.',
     approach: [
@@ -89,9 +89,9 @@ const caseFiles: CaseFile[] = [
     tag: 'Ops Project',
     accent: 'mint',
     role: 'Club VP project',
-    timeframe: 'Jan 2026 — Present',
+    timeframe: 'Jan 2026 - Present',
     problem:
-      'A 300-person, 12-hour hackathon has dozens of moving parts and no clear owners — a recipe for day-of failures. I built the system that runs it.',
+      'A 300-person, 12-hour hackathon has dozens of moving parts and no clear owners, a recipe for day-of failures. I built the system that runs it.',
     approach: [
       'Designed a structured run-of-show and task-delegation framework.',
       'Created ownership matrices so every responsibility had a named owner.',
@@ -109,9 +109,9 @@ const caseFiles: CaseFile[] = [
     tag: 'Hackathon',
     accent: 'lilac',
     role: 'VP, Operations · Progsu',
-    timeframe: 'Jan 2026 — Present',
+    timeframe: 'Jan 2026 - Present',
     problem:
-      'Progsu set out to run its hackathon — 300+ attendees, a full day of programming — with no operational playbook to lean on.',
+      'Progsu set out to run its hackathon (300+ attendees, a full day of programming) with no operational playbook to lean on.',
     approach: [
       'Coordinated 30 volunteers across 6 minigames and workshops.',
       'Managed a $7,500 budget across a 12-hour run of show.',
