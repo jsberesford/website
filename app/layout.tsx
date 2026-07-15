@@ -34,7 +34,7 @@ const script = Caveat({
 
 export const metadata: Metadata = {
   title: 'Jared Beresford | Portfolio',
-  description: '[YOUR_TAGLINE], personal portfolio of Jared Beresford.',
+  description: "Product manager with a builder's habit.",
 };
 
 export default function RootLayout({

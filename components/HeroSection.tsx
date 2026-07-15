@@ -6,7 +6,7 @@
 // chaos around a giant handwritten name; on small screens it collapses to a
 // readable vertical stack. Framer-motion fade-up on enter ties it together.
 
-import React from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 
 import FloatingDot from './FloatingDot';
@@ -19,6 +19,8 @@ import ArchedFrame from './ArchedFrame';
 import PixelDisplay from './PixelDisplay';
 
 export default function HeroSection() {
+  const [showDesktopHint, setShowDesktopHint] = useState(true);
+
   return (
     <motion.section
       id="top"
@@ -34,7 +36,26 @@ export default function HeroSection() {
       </div>
 
       {/* --- Mobile / tablet stack (default) --- */}
-      <div className="flex flex-col items-center gap-10 lg:hidden">
+      <div className="flex flex-col items-center gap-8 lg:hidden">
+        {/* Desktop-first heads-up. The full scrapbook is hand-placed for a
+            wide viewport; this is the honest, curated subset for a phone. */}
+        {showDesktopHint && (
+          <div className="w-full flex items-center gap-3 px-4 py-3 rounded-2xl shadow-card bg-ink-900 text-cream-50">
+            <span aria-hidden>🖥️</span>
+            <p className="text-xs flex-1 leading-snug">
+              Best experienced on desktop. Grab a bigger screen for the full scrapbook.
+            </p>
+            <button
+              type="button"
+              onClick={() => setShowDesktopHint(false)}
+              aria-label="Dismiss"
+              className="text-cream-50/60 hover:text-cream-50 text-lg leading-none px-1"
+            >
+              ×
+            </button>
+          </div>
+        )}
+
         <div className="text-center">
           <h1 className="font-script text-[18vw] sm:text-[14vw] lg:text-[12vw] leading-[0.85] text-ink-900">
             Jared Beresford
@@ -43,13 +64,38 @@ export default function HeroSection() {
             If the door is closed, jump out a window
           </p>
         </div>
-        <IDBadge />
-        <PlaylistCard />
-        <TerminalWindow />
-        <PolaroidCollage />
-        <TicketCard />
-        <ArchedFrame />
-        <PixelDisplay />
+
+        {/* Curated trinket grid — two columns of scaled-down objects instead
+            of one long flat list. `zoom` (not `transform: scale`) shrinks each
+            widget's actual layout box too, so the grid cells size themselves
+            correctly around the smaller content. */}
+        <div className="grid grid-cols-2 gap-x-3 gap-y-6 w-full justify-items-center">
+          <div className="row-span-2 flex items-start justify-center" style={{ zoom: 0.62 }}>
+            <IDBadge />
+          </div>
+          <div className="flex flex-col items-center gap-4">
+            <div style={{ zoom: 0.55 }}>
+              <TicketCard />
+            </div>
+            <div style={{ zoom: 0.55 }}>
+              <PlaylistCard />
+            </div>
+          </div>
+
+          <div style={{ zoom: 0.65 }}>
+            <PixelDisplay />
+          </div>
+          <div style={{ zoom: 0.75 }}>
+            <ArchedFrame />
+          </div>
+
+          <div className="col-span-2 flex justify-center" style={{ zoom: 0.85 }}>
+            <TerminalWindow />
+          </div>
+          <div className="col-span-2 flex justify-center" style={{ zoom: 0.85 }}>
+            <PolaroidCollage />
+          </div>
+        </div>
       </div>
 
       {/* --- Desktop scrapbook layout (lg+) --- */}
