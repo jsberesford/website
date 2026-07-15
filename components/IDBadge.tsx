@@ -81,7 +81,7 @@ const BRAND_ADVANCE = 3.6; // px between glyph centres (monospace ⇒ constant)
 
 type Point = { x: number; y: number; ox: number; oy: number };
 
-export default function IDBadge() {
+export default function IDBadge({ scale = 1 }: { scale?: number }) {
   const wrapperRef = useRef<HTMLDivElement>(null);
   const badgeRef = useRef<HTMLDivElement>(null);
   const pathBaseRef = useRef<SVGPathElement>(null);
@@ -112,9 +112,14 @@ export default function IDBadge() {
     const onPointerMove = (e: PointerEvent) => {
       if (!wrapperRef.current) return;
       const rect = wrapperRef.current.getBoundingClientRect();
+      // rect is measured in real (post-zoom) screen pixels, but every other
+      // coordinate here (ANCHOR_X, the rope points, BADGE_W...) lives in the
+      // component's own unzoomed pixel space. Divide by `scale` so a badge
+      // shrunk via CSS `zoom` still tracks the cursor 1:1 instead of the rope
+      // chasing a target that's off by the zoom factor.
       cursorRef.current = {
-        x: e.clientX - rect.left,
-        y: e.clientY - rect.top,
+        x: (e.clientX - rect.left) / scale,
+        y: (e.clientY - rect.top) / scale,
       };
     };
 
@@ -163,7 +168,7 @@ export default function IDBadge() {
       window.removeEventListener('scroll', onScroll);
       badge?.removeEventListener('pointerdown', onPointerDown);
     };
-  }, []);
+  }, [scale]);
 
   // Main animation loop — runs every frame, mutates refs, no React re-render.
   useEffect(() => {

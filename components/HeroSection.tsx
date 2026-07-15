@@ -71,7 +71,7 @@ export default function HeroSection() {
             correctly around the smaller content. */}
         <div className="grid grid-cols-2 gap-x-3 gap-y-6 w-full justify-items-center">
           <div className="row-span-2 flex items-start justify-center" style={{ zoom: 0.62 }}>
-            <IDBadge />
+            <IDBadge scale={0.62} />
           </div>
           <div className="flex flex-col items-center gap-4">
             <div style={{ zoom: 0.55 }}>
