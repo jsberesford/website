@@ -11,7 +11,7 @@ type Line = { prompt?: string; text?: string; delay: number };
 
 const lines: Line[] = [
   { prompt: '~ $ whoami', delay: 0 },
-  { text: 'Product Manager with 2+ years experience', delay: 800 },
+  { text: 'Product Manager and undergraduate student', delay: 800 },
   { prompt: '~ $ ls interests/', delay: 1600 },
   { text: 'cars/  investing/  gaming/', delay: 2400 },
 ];
@@ -61,21 +61,21 @@ export default function TerminalWindow() {
   }, []);
 
   return (
-    <div className="bg-neutral-900 text-accent-coral rounded-lg p-4 shadow-2xl font-mono text-sm w-[320px]">
+    <div className="bg-neutral-900 text-accent-coral rounded-lg p-5 shadow-2xl font-mono text-base w-[360px]">
       {/* Header */}
       <div className="flex items-center mb-3 relative">
         <div className="flex items-center gap-2">
-          <span className="block w-3 h-3 rounded-full" style={{ background: '#FF5F57' }} />
-          <span className="block w-3 h-3 rounded-full" style={{ background: '#FEBC2E' }} />
-          <span className="block w-3 h-3 rounded-full" style={{ background: '#28C840' }} />
+          <span className="block w-3.5 h-3.5 rounded-full" style={{ background: '#FF5F57' }} />
+          <span className="block w-3.5 h-3.5 rounded-full" style={{ background: '#FEBC2E' }} />
+          <span className="block w-3.5 h-3.5 rounded-full" style={{ background: '#28C840' }} />
         </div>
-        <div className="absolute left-0 right-0 text-center text-xs text-cream-100/60 pointer-events-none">
+        <div className="absolute left-0 right-0 text-center text-sm text-cream-100/60 pointer-events-none">
           ~/jared/about
         </div>
       </div>
 
       {/* Body */}
-      <div className="space-y-1 min-h-[120px]">
+      <div className="space-y-1 min-h-[135px]">
         {lines.map((line, i) => {
           const isPrompt = line.prompt !== undefined;
           const colorClass = isPrompt ? 'text-cream-100/80' : 'text-accent-coral';

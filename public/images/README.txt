@@ -1,7 +1,7 @@
 Drop your image assets in this folder. Filenames referenced by the components:
 
   avatar.png              - circular avatar on the ID badge          (~ 300x300, square)
-  sugarcoat-cover.png     - album cover shown as the vinyl label     (~ 500x500, square)
+  the-way-cover.jpg       - album cover shown as the vinyl label     (~ 500x500, square)
   arch.jpg            - photo inside the arched frame             (~ 600x800, portrait)
   boba.jpg            - the "fun facts" tile photo                (~ 400x400, square)
   polaroid-1.jpg      - polaroid collage photo                    (~ 500x500, square)

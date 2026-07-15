@@ -4,11 +4,11 @@
 // without competing with the page's content.
 
 const socials = [
-  { label: '{github}', href: 'https://github.com/[YOUR_GITHUB]' },
-  { label: '{linkedin}', href: 'https://linkedin.com/in/[YOUR_LINKEDIN]' },
-  { label: '{twitter}', href: 'https://twitter.com/[YOUR_TWITTER]' },
-  { label: '{email}', href: 'mailto:[YOUR_EMAIL]' },
-  { label: '{readcv}', href: 'https://read.cv/[YOUR_READCV]' },
+  { label: '{github}', href: 'https://github.com/jsberesford' },
+  { label: '{linkedin}', href: 'https://www.linkedin.com/in/jaredberesford/' },
+  { label: '{instagram}', href: 'https://instagram.com/jaredberesford' },
+  { label: '{email}', href: 'mailto:jaredberesford@gmail.com' },
+  { label: '{readcv}', href: '/resume.pdf' },
 ];
 
 export default function Footer() {
@@ -36,10 +36,6 @@ export default function Footer() {
 
       <p className="mt-10 font-script text-2xl text-ink-900">
         thanks for scrolling
-      </p>
-
-      <p className="mt-10 font-mono text-xs text-ink-900/40">
-        Built with Claude Code · Shipped on Vercel
       </p>
     </footer>
   );

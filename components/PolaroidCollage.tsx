@@ -43,7 +43,7 @@ function Leaf({ className = '', flip = false }: { className?: string; flip?: boo
 
 export default function PolaroidCollage() {
   return (
-    <div className="relative bg-kraft-200 rounded-2xl p-4 shadow-card overflow-hidden w-[290px] h-[240px]">
+    <div className="relative bg-kraft-200 rounded-2xl p-4 shadow-card overflow-hidden w-[290px] h-[240px] scale-110">
       {polaroids.map((p, i) => (
         <div
           key={i}

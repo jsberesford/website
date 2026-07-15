@@ -49,7 +49,7 @@ function VSCodeMark() {
 // Each chip rests centered + hidden behind the folder front face, then springs
 // up and fans out on hover. `-HALF` keeps the chip horizontally centered (the
 // CSS left-1/2 only positions its left edge); fanX adds the spread.
-const HALF = 18; // half of the 36px chip
+const HALF = 22; // half of the 44px chip
 const chipVariant = (fanX: number, liftY: number, rot: number, delay: number) => ({
   rest:  { x: -HALF,        y: 4,     rotate: 0,   opacity: 0, scale: 0.7 },
   hover: {
@@ -59,7 +59,7 @@ const chipVariant = (fanX: number, liftY: number, rot: number, delay: number) =>
 });
 
 const chipCls =
-  'absolute left-1/2 top-2 w-9 h-9 z-0 rounded-lg bg-cream-50 shadow-card flex items-center justify-center p-1.5';
+  'absolute left-1/2 top-2 w-11 h-11 z-0 rounded-lg bg-cream-50 shadow-card flex items-center justify-center p-1.5';
 
 export default function ArchedFrame() {
   return (
@@ -73,18 +73,18 @@ export default function ArchedFrame() {
       whileTap="hover"
     >
       {/* Folder tab */}
-      <div className="bg-accent-yellow w-10 h-3 rounded-t-md ml-2 shadow-sm" />
+      <div className="bg-accent-yellow w-14 h-4 rounded-t-md ml-2 shadow-sm" />
 
       {/* Folder body — relative box; chips sit behind the front face at rest */}
-      <div className="relative w-24 h-16">
+      <div className="relative w-32 h-20">
         {/* Tool chips — fan up and out on hover */}
-        <motion.div variants={chipVariant(-34, -52, -16, 0)} className={chipCls}>
+        <motion.div variants={chipVariant(-40, -60, -16, 0)} className={chipCls}>
           <ClaudeMark />
         </motion.div>
-        <motion.div variants={chipVariant(0, -58, 0, 0.05)} className={chipCls}>
+        <motion.div variants={chipVariant(0, -66, 0, 0.05)} className={chipCls}>
           <SpotifyMark />
         </motion.div>
-        <motion.div variants={chipVariant(34, -52, 16, 0.1)} className={chipCls}>
+        <motion.div variants={chipVariant(40, -60, 16, 0.1)} className={chipCls}>
           <VSCodeMark />
         </motion.div>
 

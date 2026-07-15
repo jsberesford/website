@@ -3,7 +3,7 @@
 // PlaylistCard: a standalone polaroid-style card that doubles as an audio
 // player. Click the vinyl to play/pause; the record spins while playing and
 // freezes at its current rotation when paused. The audio source is
-// /audio/sugarcoat.mp3 — drop your own file there (component never ships
+// /audio/the-way.mp3 — drop your own file there (component never ships
 // audio of its own).
 
 import { useEffect, useRef, useState } from 'react';
@@ -28,13 +28,13 @@ function Vinyl({ playing, onToggle }: { playing: boolean; onToggle: () => void }
     <button
       type="button"
       onClick={onToggle}
-      aria-label={playing ? 'Pause Sugarcoat' : 'Play Sugarcoat'}
+      aria-label={playing ? 'Pause The Way' : 'Play The Way'}
       className="relative block rounded-full focus:outline-none focus-visible:ring-2 focus-visible:ring-accent-coral group"
     >
       <motion.svg
         viewBox="0 0 100 100"
-        width={120}
-        height={120}
+        width={150}
+        height={150}
         aria-hidden="true"
         style={{ rotate: rotation }}
       >
@@ -55,9 +55,9 @@ function Vinyl({ playing, onToggle }: { playing: boolean; onToggle: () => void }
         {/* Fallback colored label — visible if the cover image is missing */}
         <circle cx="50" cy="50" r="18" fill="#1f9d4d" />
 
-        {/* Album cover as the label. File lives at /public/images/sugarcoat-cover.png */}
+        {/* Album cover as the label. File lives at /public/images/the-way-cover.jpg */}
         <image
-          href="/images/sugarcoat-cover.png"
+          href="/images/the-way-cover.jpg"
           x="32"
           y="32"
           width="36"
@@ -135,15 +135,15 @@ export default function PlaylistCard() {
     <motion.div
       whileHover={{ rotate: -1, y: -4, scale: 1.02 }}
       transition={{ type: 'spring', stiffness: 220, damping: 18 }}
-      className="bg-cream-50 rounded-xl w-60 px-6 pt-6 pb-5 -rotate-3 relative"
+      className="bg-cream-50 rounded-xl w-72 px-6 pt-6 pb-5 -rotate-3 relative"
       style={{
         boxShadow:
           '0 1px 0 rgba(0,0,0,0.06), 0 10px 30px -8px rgba(0,0,0,0.28), 0 22px 40px -16px rgba(0,0,0,0.2)',
       }}
     >
-      {/* Drop the track file at /public/audio/sugarcoat.mp3 — the component
+      {/* Drop the track file at /public/audio/the-way.mp3 — the component
           ships no audio of its own. */}
-      <audio ref={audioRef} src="/audio/sugarcoat.mp3" preload="none" />
+      <audio ref={audioRef} src="/audio/the-way.mp3" preload="auto" />
 
       <div className="flex justify-center">
         <Vinyl playing={playing} onToggle={toggle} />
@@ -154,9 +154,9 @@ export default function PlaylistCard() {
           Now Playing
         </div>
         <div className="font-sans font-semibold text-lg mt-1.5 text-ink-900">
-          Sugarcoat
+          The Way
         </div>
-        <div className="text-xs text-ink-900/55 mt-1">Natty</div>
+        <div className="text-xs text-ink-900/55 mt-1">Ariana Grande ft. Mac Miller</div>
         <div className="text-[10px] text-ink-900/35 mt-3 italic font-mono">
           {playing ? '▶ now spinning' : '⏸ tap the record'}
         </div>

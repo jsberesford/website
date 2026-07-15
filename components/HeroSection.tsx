@@ -105,17 +105,17 @@ export default function HeroSection() {
           <TicketCard />
         </div>
 
-        {/* Arched frame — bottom-center, sitting under the name */}
+        {/* Arched frame (folder) — bottom-center, sitting under the name */}
         <div
-          className="absolute left-[43%] bottom-[5%] z-10"
+          className="absolute left-[28%] bottom-[4%] z-10"
           style={{ transform: 'rotate(4deg)' }}
         >
           <ArchedFrame />
         </div>
 
-        {/* Pixel display — lower-center-left */}
+        {/* Pixel display — lower-center-right, to the right of the folder */}
         <div
-          className="absolute left-[22%] bottom-[9%] z-20"
+          className="absolute left-[44%] bottom-[5%] z-20"
           style={{ transform: 'rotate(-3deg)' }}
         >
           <PixelDisplay />

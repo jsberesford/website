@@ -26,6 +26,7 @@ type CaseFile = {
   approach: string[]; // the product decisions you made
   outcome: string[]; // results — lead each with a number if you have one
   stack: string[];
+  stackLabel?: string; // defaults to "Stack"; e.g. "Product" for a process/tools row
   links: { label: string; href: string }[];
   featured?: boolean;
 };
@@ -41,14 +42,35 @@ const ACCENT_DOT: Record<AccentKey, string> = {
 
 const caseFiles: CaseFile[] = [
   {
-    name: 'Shelfboss',
-    tag: 'Full-stack',
+    name: 'hungri',
+    tag: 'In Progress',
     accent: 'coral',
-    role: 'Solo, design & build',
-    timeframe: '2026',
+    role: 'Co-Founder, Product',
+    timeframe: 'June 2026 - Present',
     featured: true,
     problem:
-      'Small food operations run inventory and orders on spreadsheets that fall apart under concurrent edits. Shelfboss is a full-stack system that replaces them.',
+      'Deciding what to cook means juggling budget, calories, allergies, and what’s already in the pantry. hungri turns all of that into a meal plan and a filled Instacart cart.',
+    approach: [
+      'Scoped v1 from a 91-item backlog: cut it to the features that prove the core loop, parked the rest.',
+      'Made allergen safety the P0. Anything that could surface an unsafe recipe blocks release, no matter what else is ready.',
+      'Designed the AI meal planning flow around real constraints (budget, calories, pantry) instead of open-ended prompts.',
+    ],
+    outcome: [
+      'In progress: building toward TestFlight.',
+      'Core loop shipping first; growth features intentionally parked.',
+    ],
+    stack: ['Jira', '91-item backlog', '2-person team'],
+    stackLabel: 'Product',
+    links: [],
+  },
+  {
+    name: 'Premium Supply',
+    tag: 'Full-stack',
+    accent: 'sky',
+    role: 'Solo, design & build',
+    timeframe: '2026',
+    problem:
+      'Small food operations run inventory and orders on spreadsheets that fall apart under concurrent edits. Premium Supply is a full-stack system that replaces them.',
     approach: [
       'Architected it on Next.js 14 (App Router) with TypeScript, server components, and route handlers, backed by PostgreSQL via Prisma on a normalized relational schema.',
       'Used Prisma transactional writes for stock mutations to prevent race conditions on concurrent inventory adjustments and keep order and stock tables consistent.',
@@ -63,26 +85,6 @@ const caseFiles: CaseFile[] = [
       { label: 'Live', href: '#' },
       { label: 'GitHub', href: '#' },
     ],
-  },
-  {
-    name: 'Flowdate',
-    tag: 'Side Project',
-    accent: 'sky',
-    role: 'Solo, design & build',
-    timeframe: 'Aug - Dec 2025',
-    problem:
-      'Turning “lunch with Sam next Tuesday at 1” into a real calendar event still means manual entry. Flowdate lets natural language do it.',
-    approach: [
-      'Architected an NL pipeline that parses time, date, duration, and location from free text into validated JSON.',
-      'Returned structured fallback options when the input is ambiguous instead of failing.',
-      'Integrated with calendar APIs to create events automatically.',
-    ],
-    outcome: [
-      'Sub-300ms average parse latency.',
-      'Saves ~5 hrs/quarter across a dozen weekly events.',
-    ],
-    stack: ['TypeScript', 'FastAPI', 'Python', 'Calendar APIs'],
-    links: [{ label: 'Website', href: '#' }],
   },
   {
     name: 'Progsu Operations System',
@@ -111,15 +113,15 @@ const caseFiles: CaseFile[] = [
     role: 'VP, Operations · Progsu',
     timeframe: 'Jan 2026 - Present',
     problem:
-      'Progsu set out to run its hackathon (300+ attendees, a full day of programming) with no operational playbook to lean on.',
+      'Progsu set out to run its hackathon (400+ attendees, a full day of programming) with no operational playbook to lean on.',
     approach: [
       'Coordinated 30 volunteers across 6 minigames and workshops.',
-      'Managed a $7,500 budget across a 12-hour run of show.',
+      'Managed a $20,000 budget across a 12-hour run of show.',
       'Owned logistics, vendor coordination, and day-of execution end to end.',
     ],
     outcome: [
-      '300+ attendees over a 12-hour event.',
-      'Delivered on a $7,500 budget with 30 volunteers.',
+      '400+ attendees over a 12-hour event.',
+      'Delivered on a $20,000 budget with 30 volunteers.',
     ],
     stack: ['Notion', 'Google Workspace', 'Trello'],
     links: [{ label: 'Website', href: '#' }],
@@ -149,7 +151,7 @@ export default function WorkSection() {
 
   return (
     <section id="casefiles" className="relative py-24 sm:py-32 px-4 sm:px-8">
-      <p className="font-script text-4xl text-ink-900/80 mb-4 text-center">
+      <p className="font-script text-6xl text-ink-900/80 mb-4 text-center">
         case files
       </p>
       <p className="font-mono text-xs uppercase tracking-[0.3em] text-ink-900/50 text-center mb-10">
@@ -269,7 +271,7 @@ export default function WorkSection() {
                     </ul>
                   </FieldBlock>
 
-                  <FieldBlock label="Stack">
+                  <FieldBlock label={file.stackLabel ?? 'Stack'}>
                     <div className="flex flex-wrap gap-2">
                       {file.stack.map((s) => (
                         <span

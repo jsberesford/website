@@ -35,6 +35,28 @@ body {
     );
   }
 
+  /* Security-paper stripe texture for a ticket stub — an irregular repeating
+   * pattern of cream bars on the coral fill, tiled top-to-bottom so a stub
+   * of any height (e.g. a card expanded taller) reads as "more barcode"
+   * instead of a blank stretch of solid color. */
+  .barcode-fill {
+    background-image: repeating-linear-gradient(
+      to bottom,
+      rgba(250, 247, 242, 0.25) 0px, rgba(250, 247, 242, 0.25) 2px,
+      transparent 2px, transparent 5px,
+      rgba(250, 247, 242, 0.15) 5px, rgba(250, 247, 242, 0.15) 6px,
+      transparent 6px, transparent 11px,
+      rgba(250, 247, 242, 0.25) 11px, rgba(250, 247, 242, 0.25) 14px,
+      transparent 14px, transparent 17px,
+      rgba(250, 247, 242, 0.1) 17px, rgba(250, 247, 242, 0.1) 18px,
+      transparent 18px, transparent 26px,
+      rgba(250, 247, 242, 0.2) 26px, rgba(250, 247, 242, 0.2) 28px,
+      transparent 28px, transparent 34px,
+      rgba(250, 247, 242, 0.15) 34px, rgba(250, 247, 242, 0.15) 35px,
+      transparent 35px, transparent 44px
+    );
+  }
+
   /* Perforated ticket edge — two repeating radial gradients punch
    * semicircular notches into the left and right edges. */
   .ticket-edge {

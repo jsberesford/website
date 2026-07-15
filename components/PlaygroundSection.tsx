@@ -19,16 +19,16 @@ type Project = {
   top: string;
   left: string;
   w: string;
+  href?: string;
 };
 
 const projects: Project[] = [
-  { name: '[YOUR_PROJECT_1_NAME]', blurb: '[YOUR_PROJECT_1_BLURB]', img: '/images/playground-1.jpg', rot: -7, top: '4%',  left: '4%',  w: 'w-56' },
-  { name: '[YOUR_PROJECT_2_NAME]', blurb: '[YOUR_PROJECT_2_BLURB]', img: '/images/playground-2.jpg', rot:  4, top: '8%',  left: '34%', w: 'w-48' },
-  { name: '[YOUR_PROJECT_3_NAME]', blurb: '[YOUR_PROJECT_3_BLURB]', img: '/images/playground-3.jpg', rot: -3, top: '6%',  left: '62%', w: 'w-64' },
-  { name: '[YOUR_PROJECT_4_NAME]', blurb: '[YOUR_PROJECT_4_BLURB]', img: '/images/playground-4.jpg', rot:  8, top: '46%', left: '8%',  w: 'w-48' },
-  { name: '[YOUR_PROJECT_5_NAME]', blurb: '[YOUR_PROJECT_5_BLURB]', img: '/images/playground-5.jpg', rot: -5, top: '52%', left: '36%', w: 'w-56' },
-  { name: '[YOUR_PROJECT_6_NAME]', blurb: '[YOUR_PROJECT_6_BLURB]', img: '/images/playground-6.jpg', rot:  6, top: '50%', left: '66%', w: 'w-40' },
-  { name: '[YOUR_PROJECT_7_NAME]', blurb: '[YOUR_PROJECT_7_BLURB]', img: '/images/playground-7.jpg', rot: -8, top: '28%', left: '20%', w: 'w-40' },
+  { name: "Ray's on the River", blurb: 'Dinner at my favorite restaurant', img: '/images/playground-1.jpg', rot: -7, top: '4%',  left: '4%',  w: 'w-56' },
+  { name: 'Ariana Grande Concert', blurb: 'My favorite artist', img: '/images/playground-2.jpg', rot:  4, top: '8%',  left: '34%', w: 'w-72' },
+  { name: 'My best friend', blurb: 'Eda Mai', img: '/images/playground-3.jpg', rot: -3, top: '6%',  left: '62%', w: 'w-64', href: 'https://www.linkedin.com/in/edamai/' },
+  { name: 'Cooking Skills', blurb: 'Creamy garlic cajun shrimp', img: '/images/playground-6.jpg', rot:  8, top: '46%', left: '8%',  w: 'w-60' },
+  { name: 'Jamaica', blurb: 'Recent vacation', img: '/images/playground-5.jpg', rot: -5, top: '56%', left: '36%', w: 'w-56' },
+  { name: 'Friends', blurb: 'Friends', img: '/images/playground-4.jpg', rot:  6, top: '50%', left: '66%', w: 'w-56' },
 ];
 
 export default function PlaygroundSection() {
@@ -46,10 +46,10 @@ export default function PlaygroundSection() {
   };
 
   return (
-    <section id="playground" className="relative py-24 sm:py-32 px-4 sm:px-8">
-      <p className="font-script text-4xl text-ink-900/80 mb-4 text-center">playground</p>
+    <section id="off-the-clock" className="relative py-24 sm:py-32 px-4 sm:px-8">
+      <p className="font-script text-6xl text-ink-900/80 mb-4 text-center">off the clock</p>
       <p className="font-mono text-xs uppercase tracking-[0.3em] text-ink-900/50 text-center mb-8">
-        [YOUR_PLAYGROUND_TAGLINE]
+        a peek into life beyond the desk
       </p>
 
       <motion.div
@@ -58,13 +58,13 @@ export default function PlaygroundSection() {
         viewport={{ once: true, amount: 0.2 }}
         transition={{ duration: 0.6, ease: 'easeOut' }}
         ref={boardRef}
-        className="relative mx-auto max-w-6xl rounded-3xl bg-kraft-200 paper-texture shadow-card p-8 sm:p-12 overflow-hidden min-h-[520px]"
+        className="relative mx-auto max-w-6xl rounded-3xl bg-kraft-200 paper-texture shadow-card p-8 sm:p-12 min-h-[680px]"
       >
         <span className="font-script text-xl text-ink-900/40 absolute top-4 right-6 pointer-events-none select-none">
           drag me →
         </span>
 
-        <div className="relative flex flex-wrap gap-4 justify-center lg:block lg:h-[460px]">
+        <div className="relative flex flex-wrap gap-4 justify-center lg:block lg:h-[580px]">
           {projects.map((project, i) => {
             const isDragging = dragging === i;
             const showTooltip = hovered === i && !isDragging;
@@ -117,7 +117,7 @@ export default function PlaygroundSection() {
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: 6 }}
                         transition={{ duration: 0.18 }}
-                        className="absolute left-1/2 -translate-x-1/2 -top-9 bg-ink-900 text-cream-50 text-xs font-mono px-2 py-1 rounded shadow-card whitespace-nowrap z-30 pointer-events-none"
+                        className="absolute left-3 -top-9 bg-ink-900 text-cream-50 text-xs font-mono px-2 py-1 rounded shadow-card whitespace-nowrap z-30 pointer-events-none"
                       >
                         {project.blurb}
                       </motion.div>
@@ -125,7 +125,19 @@ export default function PlaygroundSection() {
                   </AnimatePresence>
                 </div>
                 <p className="font-mono text-xs uppercase tracking-wider text-ink-900/70 mt-2 px-1">
-                  {project.name}
+                  {project.href ? (
+                    <a
+                      href={project.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      onPointerDown={(e) => e.stopPropagation()}
+                      className="pointer-events-auto underline decoration-dotted hover:text-ink-900"
+                    >
+                      {project.name}
+                    </a>
+                  ) : (
+                    project.name
+                  )}
                 </p>
               </motion.div>
             );

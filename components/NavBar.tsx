@@ -14,10 +14,10 @@ type NavLink = {
 };
 
 const links: NavLink[] = [
-  { href: '#work', label: 'Snapshot', index: '01.' },
+  { href: '#work', label: 'Field Manual', index: '01.' },
   { href: '#casefiles', label: 'Work', index: '02.' },
   { href: '#experience', label: 'Experience', index: '03.' },
-  { href: '#playground', label: 'Playground', index: '04.' },
+  { href: '#off-the-clock', label: 'Off the Clock', index: '04.' },
 ];
 
 export default function NavBar() {
